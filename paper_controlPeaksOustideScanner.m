@@ -40,5 +40,28 @@ set(line,'color',[0 0 0],'LineWidth',2)
 
 title(['Inside mean ' num2str(mean(peaksInsideScanner(:,3))) ' oustside ' num2str(mean(peaksOutsideScanner(:,3))) ' p ' num2str(p) ' t ' num2str(stats.tstat)])
 
+%% Bayes
 
+% one sample ttest bayes factor
+
+% Prior H1: corresponds to an effect differing from 0 with a p-value of 0.05
+nobs = 29; % number of observations
+xref = +1.701; % significant t value for one-sided ttest 28 degrees of freedom reference effect size (significant effect)
+% source: http://www.ttable.org/uploads/2/1/7/9/21795380/9754276.png?852
+
+
+disp('EGG inside outside:')
+load([global_path2root 'data4paper' filesep 'rFWDxCS_subjects.mat'])
+% data obtained form script paper_control_corrMovement_CS
+
+xdat = [peaksInsideScanner(:,3)-peaksOutsideScanner(:,3)]
+
+% perform ttest
+[bf_log10]= my_ttest_bayes(xdat, xref);
+
+% interpret bf
+[res_Bayes, bf] = interpret_Bayes(bf_log10)
+
+% intert it to 
+bf_inverted_unlog = 1/(10^bf)
 
