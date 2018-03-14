@@ -33,6 +33,8 @@ xref = +1.699; % significant t value for one-sided ttest 29 degrees of freedom r
 % source: http://www.ttable.org/uploads/2/1/7/9/21795380/9754276.png?852
 
 
+
+
 disp('FWD:')
 load([global_path2root 'data4paper' filesep 'rFWDxCS_subjects.mat'])
 % data obtained form script paper_control_corrMovement_CS
@@ -81,7 +83,11 @@ end
 % p value from ttest to compare 
 [h pGender ci stats] = ttest(clusterCS(~females,:),clusterCS(females,:))
 
-mean(clusterCS(~females,:)-clusterCS(females,:))
+bar([mean(clusterCS(~females,:));mean(clusterCS(females,:))])
+shg
+
+
+
 
 
 table4exportEffectSizes = [stats.tstat',BMIr,anxietyr,powerEGGr,peakEGGr]

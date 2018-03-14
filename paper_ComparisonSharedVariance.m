@@ -204,8 +204,8 @@ errorbar(data2plot(:),data2plot_error(:),'.k','LineWidth',2)
 figure
 boxplot([squaredPearson(:,[6 7 8 9]) , squaredCoherence_peak(:,[6 7 8 9]) ,squaredPearson(:,[2 3 4 5]), squaredCoherence_peak(:,[2 3 4 5]) ])
 
-
-
+boxplot4export_mwm_pearson = [squaredPearson(:,[6 7 8 9]),squaredCoherence_peak(:,[6 7 8 9])];
+boxplot4export_vocc_pearson = [squaredPearson(:,[2 3 4 5]),squaredCoherence_peak(:,[2 3 4 5])];
 %% plot representative subject timeseries
 
 % cut data of all subjects into trials

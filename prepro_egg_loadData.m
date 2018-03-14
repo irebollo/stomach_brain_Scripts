@@ -37,6 +37,8 @@ end
 
 EGG=strcmp(dataType,'EGG');
 EKG=strcmp(dataType,'EKG');
+Pupil= strcmp(dataType,'Pupil');
+
 
 if EGG==1
         cfg = [];    %configuration structure
@@ -48,6 +50,12 @@ elseif EKG==1
     cfg = [];    %configuration structure
     cfg.dataset = pathToBrainAmp;
     cfg.channel = {'ECG_6', 'ECG_7', 'ECG_8'};
+    dataInFieldtrip = ft_preprocessing(cfg); %structure with data (as one long continuous segment)
+elseif Pupil==1
+    %Data
+    cfg = [];    %configuration structure
+    cfg.dataset = pathToBrainAmp;
+    cfg.channel = {'D'};
     dataInFieldtrip = ft_preprocessing(cfg); %structure with data (as one long continuous segment)
   
 end

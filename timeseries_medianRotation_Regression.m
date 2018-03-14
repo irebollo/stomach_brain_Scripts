@@ -35,6 +35,8 @@ IR commented 28/06/2017
 
 %}
 %% Import cfg parameters
+
+
 fOrder = cfg.fOrder;
 frequencySpread = cfg.frequencySpread;
 kernelWidth= cfg.kernelWidth;
@@ -120,11 +122,9 @@ end
 nhist(medianPLV(insideBrain))
 xlabel('PLV')
 title(['S',sprintf('%.2d',subj_idx),32,'surrogatePLV across bain. Mean:' num2str(mean(medianPLV(insideBrain))) ' rSS voxel:' 32 num2str(medianPLV(insideBrain(ind_voxelCoordinates_inside)))],'fontsize',18)
-
-  
+ 
 set(gcf,'units','normalized','outerposition',[0 0 1 1])
 set(gcf, 'PaperPositionMode', 'auto');
-
 print ('-dpng', '-painters', eval('plotFilename'))
 print ('-depsc2', '-painters', eval('plotFilename'))
 saveas(SanityPlot,strcat(plotFilename,'.fig'))    

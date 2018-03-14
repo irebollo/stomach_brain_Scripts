@@ -1,4 +1,4 @@
-paper_network_dynamics
+% paper_network_dynamics
 % Perform the EGG-BOLD dPLV analysis
 
 %% CFG giles
@@ -181,6 +181,7 @@ for iSubj = 1:30
 corrMatrix_alls(iSubj,:,:) = corr(squeeze(dPLV_allClus_alls(iSubj,:,:))');
 end
 
+
 corrMatrix_alls_mean = squeeze(mean(corrMatrix_alls))
 mean(corrMatrix_alls(:))
 figure;imagesc(triu(corrMatrix_alls_mean,1),[0 0.5]);
@@ -207,17 +208,43 @@ p_relevant = p(find(triu(squeeze(p),1)))
 
 p_bonfe = squeeze(p.*66)
 
-https://brainder.org/2011/09/05/fdr-corrected-fdr-adjusted-p-values/
+% https://brainder.org/2011/09/05/fdr-corrected-fdr-adjusted-p-values/
 
 
 %% Gastric network coupling global
 
 global_dPLV_allClus_alls = zeros(30,1);
+global_dPLV_allClus_alls_sum = zeros(30,1);
+
 for iSubj = 1:30
 corrmatrix_isubj = squeeze(corrMatrix_alls(iSubj,:,:));
 corrmatrix_isubj = triu(corrmatrix_isubj,1);
 global_dPLV_allClus_alls(iSubj,:) = mean(corrmatrix_isubj(:))
+global_dPLV_allClus_alls_sum(iSubj,:) = sum(corrmatrix_isubj(:))
+% global_dPLV_allClus_alls_mean(iSubj,:) = mean(corrmatrix_isubj(:))
+% figure
+% boxplot(corrmatrix_isubj(:))
+% ylim([-1 1]);
+% title(num2str(subjects(iSubj)))
 end
+
+boxplot(global_dPLV_allClus_alls)
+mean(global_dPLV_allClus_alls)
+
+sum(global_dPLV_allClus_alls_sum)
+
+for iSubj = 1:30
+corrMatrix_iSubj_temp = corr(squeeze(dPLV_allClus_alls(iSubj,:,:))');
+corrMatrixis_vector = triu(corrMatrix_iSubj_temp,1);
+corrMatrixAlls_vector_alls(iSubj,:) = corrMatrixis_vector(:)
+end
+
+mean(corrMatrixAlls_vector_alls(find(corrMatrixAlls_vector_alls)))
+figure
+boxplot(corrMatrixAlls_vector_alls(find(corrMatrixAlls_vector_alls)))
+
+sum(corrMatrixAlls_vector_alls(:))
+
 
 mean(global_dPLV_allClus_alls)
 std(global_dPLV_allClus_alls)
@@ -226,6 +253,7 @@ global_dPLV_allClus_alls_fisher = fisherz(global_dPLV_allClus_alls)
 
 figure
 nhist(global_dPLV_allClus_alls)
+
 
 % control 
 mean(triu(corrMatrix_alls,1),2)

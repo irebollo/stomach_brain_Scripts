@@ -1,10 +1,9 @@
 function tools_writeMri(data,filename)
+% data, filename
+% Write 3d or 4d data in nifti file using fieldtrip
+% parameters are specified for PHYSIENS experiment (dimensions)
+% IR 26/03/2015
 
-%{
-Write 3d or 4d data in nifti file using fieldtrip
-parameters are specified for PHYSIENS experiment (dimensions)
-IR 26/03/2015
-%}
 mri=[];
 
 mri.transform = ...
